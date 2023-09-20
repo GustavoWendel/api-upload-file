@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Welcome to My App</h1>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary btn-lg btn-block" th:href="@{/api/transactions}">Transaction Summary</a>
+        </div>
+        <div class="col">
+            <a class="btn btn-secondary btn-lg btn-block" th:href="@{/api/upload}">Upload File</a>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS (optional) -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

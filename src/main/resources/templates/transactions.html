@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction Summary</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Transaction Summary</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Store ID</th>
+            <th>Store Name</th>
+            <th>Account Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="summary : ${transactionSummary}">
+            <td th:text="${summary.storeId}"></td>
+            <td th:text="${summary.storeName}"></td>
+            <td th:text="${summary.accountBalance}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/}" class="btn btn-secondary">Start</a>
+</div>
+
+<!-- Include Bootstrap JS (optional) -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
