@@ -7,7 +7,9 @@
 Certifique-se de ter os seguintes pré-requisitos instalados em seu sistema:
 
 Java Development Kit (JDK) 17 ou superior
+
 Docker (opcional, se você deseja executar o PostgreSQL em um contêiner Docker)
+
 Certifique-se de ter o Git instalado em sua máquina. Você pode baixá-lo aqui.
 
 ## Clonando o repositório
