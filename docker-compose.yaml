@@ -3,7 +3,7 @@ services:
   app:
     image: openjdk:17-jdk
     ports:
-      - 8080:8080
+      - "8080:8080"
     volumes:
       - ./app:/app
     working_dir: /app
@@ -12,12 +12,12 @@ services:
       - db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/db_manager_file
-      - SPRING_DATASOURCE_USERNAME=db_user
-      - SPRING_DATASOURCE_PASSWORD=db_password
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
   db:
     image: postgres:13
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:

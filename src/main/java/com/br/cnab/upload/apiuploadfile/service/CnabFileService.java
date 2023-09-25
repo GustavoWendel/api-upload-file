@@ -1,6 +1,5 @@
 package com.br.cnab.upload.apiuploadfile.service;
 
-import com.br.cnab.upload.apiuploadfile.model.StoreOperation;
 import com.br.cnab.upload.apiuploadfile.model.StoreOperationResponse;
 import org.springframework.web.multipart.MultipartFile;
 

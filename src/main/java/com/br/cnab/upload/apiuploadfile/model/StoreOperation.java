@@ -43,10 +43,6 @@ public class StoreOperation {
         }
     }
 
-    public String getFormattedTotalBalance() {
-        return String.format("R$ %.2f", this.totalBalance);
-    }
-
     public StoreOperationResponse toResponse() {
         return new StoreOperationResponse(this.storeName, this.totalBalance);
     }

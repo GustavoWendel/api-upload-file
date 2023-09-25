@@ -20,7 +20,7 @@
         <tbody>
         <tr th:each="storeOperation : ${storeOperationsList}">
             <td th:text="${storeOperation.getStoreName()}"></td>
-            <td th:text="${storeOperation.getTotalBalance()}"></td>
+            <td th:text="${storeOperation.getFormattedTotalBalance()}"></td>
         </tr>
         </tbody>
     </table>

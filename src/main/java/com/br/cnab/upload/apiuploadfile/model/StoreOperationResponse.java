@@ -14,5 +14,9 @@ public class StoreOperationResponse {
         this.storeName = storeName;
         this.totalBalance = totalBalance;
     }
+
+    public String getFormattedTotalBalance() {
+        return String.format("R$ %.2f", this.totalBalance);
+    }
 }
 
