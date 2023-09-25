@@ -2,21 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Upload File</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-    <h1 class="text-center">Welcome to My App</h1>
-    <div class="row">
-        <div class="col">
-            <a class="btn btn-primary btn-lg btn-block" th:href="@{/api/transactions}">Transaction Summary</a>
+    <h1>Upload File</h1>
+
+    <!-- Error message -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+
+    <!-- Success message -->
+    <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
+
+    <form method="POST" action="/api/upload" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Select File:</label>
+            <input type="file" name="file" accept=".txt" class="form-control-file" id="file">
         </div>
-        <div class="col">
-            <a class="btn btn-secondary btn-lg btn-block" th:href="@{/api/upload}">Upload File</a>
-        </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+
+    <br>
+    <a th:href="@{/api/store-operations}" class="btn btn-secondary">View Store Operations</a>
 </div>
 
 <!-- Include Bootstrap JS (optional) -->

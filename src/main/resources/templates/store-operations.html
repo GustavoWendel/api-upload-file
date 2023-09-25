@@ -2,27 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Transaction Summary</title>
+    <title>Store Operations</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-    <h1>Transaction Summary</h1>
+    <h1>Store Operations</h1>
 
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Store ID</th>
             <th>Store Name</th>
-            <th>Account Balance</th>
+            <th>Total Balance</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="summary : ${transactionSummary}">
-            <td th:text="${summary.storeId}"></td>
-            <td th:text="${summary.storeName}"></td>
-            <td th:text="${summary.accountBalance}"></td>
+        <tr th:each="storeOperation : ${storeOperationsList}">
+            <td th:text="${storeOperation.getStoreName()}"></td>
+            <td th:text="${storeOperation.getTotalBalance()}"></td>
         </tr>
         </tbody>
     </table>
