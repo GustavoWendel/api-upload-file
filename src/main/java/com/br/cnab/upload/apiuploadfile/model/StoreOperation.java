@@ -1,6 +1,6 @@
 package com.br.cnab.upload.apiuploadfile.model;
 
-import com.br.cnab.upload.apiuploadfile.entity.CNAB;
+import com.br.cnab.upload.apiuploadfile.entity.Transaction;
 import com.br.cnab.upload.apiuploadfile.enums.TransactionTypeEnum;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 public class StoreOperation {
 
     private final String storeName;
-    private final List<CNAB> operations;
+    private final List<Transaction> operations;
     private double totalBalance;
 
     public StoreOperation(String storeName) {
@@ -22,7 +22,7 @@ public class StoreOperation {
         return storeName;
     }
 
-    public List<CNAB> getOperations() {
+    public List<Transaction> getOperations() {
         return operations;
     }
 
@@ -30,21 +30,17 @@ public class StoreOperation {
         return totalBalance;
     }
 
-    public void addOperation(CNAB cnab) {
-        operations.add(cnab);
+    public void addOperation(Transaction transaction) {
+        operations.add(transaction);
 
-        String transactionType = cnab.getTransactionType().toString().trim();
+        String transactionType = transaction.getTransactionType().toString().trim();
 
         TransactionTypeEnum type = TransactionTypeEnum.fromCode(transactionType);
 
         if (type != null) {
-            double normalizedValue = cnab.getTransactionValue();
+            double normalizedValue = transaction.getTransactionValue();
             totalBalance += type.getSignal() * normalizedValue;
         }
-    }
-
-    public String getFormattedTotalBalance() {
-        return String.format("R$ %.2f", this.totalBalance);
     }
 
     public StoreOperationResponse toResponse() {

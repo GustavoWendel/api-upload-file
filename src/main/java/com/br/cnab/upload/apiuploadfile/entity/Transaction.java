@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class CNAB {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,17 +24,6 @@ public class CNAB {
     private String storeOwner;
     private String storeName;
 
-    public CNAB() {
-    }
-
-    public CNAB(Integer transactionType, String transactionDate, double transactionValue, String cpf, String card, String occurrenceTime, String storeOwner, String storeName) {
-        this.transactionType = transactionType;
-        this.transactionDate = transactionDate;
-        this.transactionValue = transactionValue;
-        this.cpf = cpf;
-        this.card = card;
-        this.occurrenceTime = occurrenceTime;
-        this.storeOwner = storeOwner;
-        this.storeName = storeName;
+    public Transaction() {
     }
 }

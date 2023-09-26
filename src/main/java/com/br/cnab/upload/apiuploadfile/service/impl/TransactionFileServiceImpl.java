@@ -1,10 +1,10 @@
 package com.br.cnab.upload.apiuploadfile.service.impl;
 
-import com.br.cnab.upload.apiuploadfile.entity.CNAB;
+import com.br.cnab.upload.apiuploadfile.entity.Transaction;
 import com.br.cnab.upload.apiuploadfile.model.StoreOperation;
 import com.br.cnab.upload.apiuploadfile.model.StoreOperationResponse;
-import com.br.cnab.upload.apiuploadfile.repository.CnabRepository;
-import com.br.cnab.upload.apiuploadfile.service.CnabFileService;
+import com.br.cnab.upload.apiuploadfile.repository.TransactionFileRepository;
+import com.br.cnab.upload.apiuploadfile.service.TransactionFileService;
 import com.br.cnab.upload.apiuploadfile.utils.DateTimeUtils;
 import com.br.cnab.upload.apiuploadfile.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
@@ -21,28 +21,28 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class CnabFileServiceImpl implements CnabFileService {
+public class TransactionFileServiceImpl implements TransactionFileService {
 
-    private final CnabRepository cnabRepository;
+    private final TransactionFileRepository transactionFileRepository;
 
-    public void processCNABFile(MultipartFile file) throws IOException {
+    public void processTransactionFile(MultipartFile file) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             String line;
             while ((line = br.readLine()) != null) {
-                CNAB cnab = parseFile(line);
-                cnabRepository.save(cnab);
+                Transaction transaction = parseFile(line);
+                transactionFileRepository.save(transaction);
             }
         }
     }
 
     public List<StoreOperationResponse> listStoreOperations() {
         List<StoreOperationResponse> storeOperationsList = new ArrayList<>();
-        List<CNAB> allRecords = cnabRepository.findAll();
+        List<Transaction> allRecords = transactionFileRepository.findAll();
 
         Map<String, StoreOperation> storeMap = new HashMap<>();
 
-        for (CNAB cnab : allRecords) {
-            String storeName = cnab.getStoreName().trim();
+        for (Transaction transaction : allRecords) {
+            String storeName = transaction.getStoreName().trim();
 
             if (!storeMap.containsKey(storeName)) {
                 StoreOperation storeOperations = new StoreOperation(storeName);
@@ -50,7 +50,7 @@ public class CnabFileServiceImpl implements CnabFileService {
             }
 
             StoreOperation storeOperations = storeMap.get(storeName);
-            storeOperations.addOperation(cnab);
+            storeOperations.addOperation(transaction);
         }
 
         for (StoreOperation storeOperation : storeMap.values()) {
@@ -60,7 +60,7 @@ public class CnabFileServiceImpl implements CnabFileService {
         return storeOperationsList;
     }
 
-    private CNAB parseFile(String line) {
+    private Transaction parseFile(String line) {
         String card = line.substring(30, 42);
         String hour = line.substring(42, 48);
         String owner = line.substring(48, 62);
@@ -70,18 +70,18 @@ public class CnabFileServiceImpl implements CnabFileService {
         double value = Double.parseDouble(line.substring(9, 19)) / 100;
         String cpf = line.substring(19, 30);
 
-        CNAB cnab = new CNAB();
+        Transaction transaction = new Transaction();
 
-        cnab.setTransactionType(type);
-        cnab.setTransactionDate(DateUtils.formatDateToYYYYMMDD(date));
-        cnab.setTransactionValue(value);
-        cnab.setCpf(cpf);
-        cnab.setCard(card);
-        cnab.setOccurrenceTime(DateTimeUtils.formatTimeInUTC3(hour));
-        cnab.setStoreOwner(owner);
-        cnab.setStoreName(storeName);
+        transaction.setTransactionType(type);
+        transaction.setTransactionDate(DateUtils.formatDateToYYYYMMDD(date));
+        transaction.setTransactionValue(value);
+        transaction.setCpf(cpf);
+        transaction.setCard(card);
+        transaction.setOccurrenceTime(DateTimeUtils.formatTimeInUTC3(hour));
+        transaction.setStoreOwner(owner);
+        transaction.setStoreName(storeName);
 
-        return cnab;
+        return transaction;
     }
 
 }

@@ -10,7 +10,7 @@ public class DateTimeUtils {
     public static String formatTimeInUTC3(String dateTimeString) {
 
         try {
-            SimpleDateFormat inputSdf = new SimpleDateFormat("HHmmss"); // Defina o formato de entrada adequado
+            SimpleDateFormat inputSdf = new SimpleDateFormat("HHmmss");
             Date date = inputSdf.parse(dateTimeString);
 
             SimpleDateFormat outputSdf = new SimpleDateFormat("HH:mm:ss");
@@ -19,8 +19,8 @@ public class DateTimeUtils {
 
             return outputSdf.format(date);
         } catch (ParseException e) {
-            e.printStackTrace(); // Lida com erros de análise de data
-            return null; // Ou lança uma exceção personalizada, conforme necessário
+            e.printStackTrace();
+            return null;
         }
     }
 }

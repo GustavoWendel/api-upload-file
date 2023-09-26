@@ -11,15 +11,19 @@
     <h1>Upload File</h1>
 
     <!-- Error message -->
-    <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+    </div>
 
     <!-- Success message -->
-    <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+    </div>
 
     <form method="POST" action="/api/upload" enctype="multipart/form-data">
         <div class="form-group">
             <label for="file">Select File:</label>
-            <input type="file" name="file" accept=".txt" class="form-control-file" id="file">
+            <input type="file" name="file" accept=".txt" class="form-control-file" id="file" required>
         </div>
         <button type="submit" class="btn btn-primary">Upload</button>
     </form>
